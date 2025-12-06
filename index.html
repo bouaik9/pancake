@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pancake Paradise | Order Now</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D97706; /* Golden Syrup Color */
+            --secondary: #FFFBEB; /* Cream Color */
+            --accent: #B45309;
+            --text: #374151;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('pancake3.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: -50px auto 50px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Custom Radio/Checkbox Styling */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .option-item input {
+            display: none;
+        }
+
+        .option-item label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .option-item label:hover {
+            border-color: var(--primary);
+            background-color: #fff7ed;
+        }
+
+        /* Selected State */
+        .option-item input:checked + label {
+            border-color: var(--primary);
+            background-color: #fff7ed;
+            color: var(--primary);
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(217, 119, 6, 0.2);
+        }
+
+        .icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* Text Area */
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: inherit;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Order Button */
+        .btn-order {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-order:hover {
+            background-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(217, 119, 6, 0.4);
+        }
+
+        .btn-order:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.5rem; }
+            .container { margin-top: -30px; padding: 15px; }
+            .order-card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div>
+        <h1>Pancake Paradise</h1>
+        <p>Fluffy, sweet, and customized just for you.</p>
+    </div>
+</header>
+
+
+
+<div class="container">
+    <div class="order-card">
+
+        <div class="form-group">
+            <h2>1. Choose your Stack</h2>
+            <div class="options-grid">
+                <div class="option-item">
+                    <input type="radio" name="stack" id="stack1" value="Single (1)" checked>
+                    <label for="stack1">
+                        <span class="icon">🥞</span>
+                        Single
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="radio" name="stack" id="stack2" value="Double (2)">
+                    <label for="stack2">
+                        <span class="icon">🥞🥞</span>
+                        Double
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="radio" name="stack" id="stack3" value="Triple (3)">
+                    <label for="stack3">
+                        <span class="icon">🥞🥞🥞</span>
+                        Triple
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h2>2. Add Toppings</h2>
+            <div class="options-grid">
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="choco" value="Chocolate Chips">
+                    <label for="choco">
+                        <span class="icon">🍫</span>
+                        Choco Chips
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="straw" value="Strawberries">
+                    <label for="straw">
+                        <span class="icon">🍓</span>
+                        Strawberry
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="banana" value="Banana Slices">
+                    <label for="banana">
+                        <span class="icon">🍌</span>
+                        Banana
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="nutella" value="Nutella">
+                    <label for="nutella">
+                        <span class="icon">🌰</span>
+                        Nutella
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="honey" value="Honey">
+                    <label for="honey">
+                        <span class="icon">🍯</span>
+                        Honey
+                    </label>
+                </div>
+                <div class="option-item">
+                    <input type="checkbox" name="topping" id="blue" value="Blueberries">
+                    <label for="blue">
+                        <span class="icon">🫐</span>
+                        Blueberries
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h2>3. Your Details</h2>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="John Doe" style="width: 100%; padding: 15px; border: 2px solid #e5e7eb; border-radius: 10px; margin-bottom: 15px;">
+
+            <label for="address">Delivery Address</label>
+            <textarea id="address" rows="2" placeholder="Street, Building No..."></textarea>
+        </div>
+
+        <button class="btn-order" onclick="sendToWhatsapp()">
+            Order Now via WhatsApp 🚀
+        </button>
+    </div>
+</div>
+
+<script>
+    function sendToWhatsapp() {
+        // 1. configuration
+        // REPLACE THIS WITH YOUR PHONE NUMBER (include country code, no + sign)
+        // Example: 15551234567 for USA, 447700900000 for UK
+        const phoneNumber = "212778813475";
+
+        // 2. Get Form Values
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+
+        // Get selected stack size
+        const stackSize = document.querySelector('input[name="stack"]:checked').value;
+
+        // Get selected toppings
+        const toppingsCheckboxes = document.querySelectorAll('input[name="topping"]:checked');
+        let toppingsList = [];
+        toppingsCheckboxes.forEach((checkbox) => {
+            toppingsList.push(checkbox.value);
+        });
+
+        // Validation (Basic)
+        if (name === "" || address === "") {
+            alert("Please enter your name and address!");
+            return;
+        }
+
+        // 3. Format the Message
+        // We use %0a for new lines in URL encoding
+        const toppingsString = toppingsList.length > 0 ? toppingsList.join(', ') : "Plain (No toppings)";
+
+        const message =
+            `*NEW PANCAKE ORDER!* 🥞
+-----------------------
+*Name:* ${name}
+*Stack:* ${stackSize}
+*Toppings:* ${toppingsString}
+*Address:* ${address}
+-----------------------
+Please confirm my order!`;
+
+        // 4. Create the URL
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // 5. Open WhatsApp
+        window.open(whatsappUrl, '_blank');
+    }
+</script>
+</body>
+</html>

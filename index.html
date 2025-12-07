@@ -259,75 +259,24 @@
             color: #666;
         }
 
-        /* Time Slots */
-        .time-slots-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .time-option input[type="radio"] {
+        /* Selection Summary */
+        .selection-summary {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
             display: none;
         }
 
-        .slot-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border: 2px solid #eef0f2;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
+        .summary-text {
+            margin: 0;
+            color: #333;
+            font-size: 0.95rem;
         }
 
-        .slot-card.selected {
-            border-color: var(--primary);
-            background-color: #fff7ed;
-        }
-
-        .slot-card.selected .slot-time {
+        .summary-text strong {
             color: var(--primary);
-        }
-
-        .slot-time {
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .slot-status {
-            font-size: 0.85rem;
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        .time-option:hover .slot-card {
-            border-color: var(--primary);
-        }
-
-        .time-option input[type="radio"]:checked + .slot-card {
-            border-color: var(--primary);
-            background-color: #fff7ed;
-        }
-
-        .time-option input[type="radio"]:checked + .slot-card .slot-time {
-            color: var(--primary);
-        }
-
-        .time-option.disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .time-option.disabled .slot-card {
-            background-color: #f9f9f9;
-            border-color: #eee;
-        }
-
-        .time-option.disabled .slot-status {
-            color: #999;
         }
 
         /* Price Summary */
@@ -390,26 +339,6 @@
             font-size: 1rem;
         }
 
-        /* Selection Summary */
-        .selection-summary {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-            display: none;
-        }
-
-        .summary-text {
-            margin: 0;
-            color: #333;
-            font-size: 0.95rem;
-        }
-
-        .summary-text strong {
-            color: var(--primary);
-        }
-
         /* Input Styles */
         input[type="text"] {
             width: 100%;
@@ -454,11 +383,11 @@
             <h2>1. Choose your Stack</h2>
             <div class="options-grid">
                 <div class="option-item">
-                    <input type="radio" name="stack" id="stack1" value="Single" data-price="5.99" checked>
+                    <input type="radio" name="stack" id="stack1" value="Single" data-price="6.99" checked>
                     <label for="stack1">
                         <span class="icon">🥞</span>
                         Single
-                        <div class="hour-price" style="margin-top: 5px;">MAD 5.99</div>
+                        <div class="hour-price" style="margin-top: 5px;">MAD 6.99</div>
                     </label>
                 </div>
                 <div class="option-item">
@@ -466,7 +395,7 @@
                     <label for="stack2">
                         <span class="icon">🥞🥞</span>
                         Double
-                        <div class="hour-price" style="margin-top: 5px;">MAD 12.99</div>
+                        <div class="hour-price" style="margin-top: 5px;">MAD 13.99</div>
                     </label>
                 </div>
                 <div class="option-item">
@@ -481,45 +410,45 @@
         </div>
 
         <div class="form-group">
-            <h2>2. Add Toppings (MAD 2.99 each)</h2>
+            <h2>2. Add Toppings (MAD 1.99 each)</h2>
             <div class="options-grid">
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="choco" value="Chocolate Chips" data-price="2.99">
+                    <input type="checkbox" name="topping" id="choco" value="Chocolate Chips" data-price="1.99">
                     <label for="choco">
                         <span class="icon">🍫</span>
                         Choco Chips
                     </label>
                 </div>
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="straw" value="Strawberries" data-price="2.99">
+                    <input type="checkbox" name="topping" id="straw" value="Strawberries" data-price="1.99">
                     <label for="straw">
                         <span class="icon">🍮</span>
                         Caramel
                     </label>
                 </div>
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="banana" value="Banana Slices" data-price="2.99">
+                    <input type="checkbox" name="topping" id="banana" value="Banana Slices" data-price="1.99">
                     <label for="banana">
                         <span class="icon">🍌</span>
                         Banana
                     </label>
                 </div>
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="nutella" value="Nutella" data-price="2.99">
+                    <input type="checkbox" name="topping" id="nutella" value="Nutella" data-price="1.99">
                     <label for="nutella">
                         <span class="icon">🌰</span>
                         Nutella
                     </label>
                 </div>
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="honey" value="Honey" data-price="2.99">
+                    <input type="checkbox" name="topping" id="honey" value="Honey" data-price="1.99">
                     <label for="honey">
                         <span class="icon">🍯</span>
                         Honey
                     </label>
                 </div>
                 <div class="option-item">
-                    <input type="checkbox" name="topping" id="blue" value="Blueberries" data-price="2.99">
+                    <input type="checkbox" name="topping" id="blue" value="Blueberries" data-price="1.99">
                     <label for="blue">
                         <span class="icon">🥜</span>
                         Peanut butter
@@ -531,22 +460,14 @@
         <div class="form-group">
             <h2>3. Choose Delivery Time</h2>
             <div class="delivery-section">
-                <!-- Date buttons -->
-
-
+              
+                <!-- Hour Selection -->
                 <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 10px;">Select Delivery Hour</h3>
                 <div class="hour-pricing-grid" id="hour-pricing-grid">
                     <!-- Hour cards will be generated here -->
                 </div>
 
-                <!-- Time slots container (will be shown when hour is selected) -->
-                <div id="time-slots-container" style="display: none;">
-                    <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 10px; margin-top: 20px;">Select Time Slot</h3>
-                    <div id="slots-container" class="time-slots-grid">
-                        <!-- Time slots will be generated here -->
-                    </div>
-                </div>
-
+                <!-- Selection Summary -->
                 <div class="selection-summary" id="selection-summary">
                     <p class="summary-text" id="summary-text"></p>
                 </div>
@@ -587,14 +508,13 @@
     ];
 
     const stackPrices = {
-        'Single': 5.99,
+        'Single': 6.99,
         'Double': 11.99,
         'Triple': 19.99
     };
 
     let selectedDay = 'today'; // Default selection
     let selectedHour = null; // Track selected hour
-    let selectedSlot = null; // Track selected time slot
 
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
@@ -658,125 +578,12 @@
             clickedCard.classList.add('selected');
         }
 
-        // Show time slots
-        document.getElementById('time-slots-container').style.display = 'block';
-
-        // Clear any previous slot selection
-        selectedSlot = null;
-
-        // Re-render slots based on selected hour
-        renderSlots();
+        // Update summary and price
         updatePriceSummary();
         updateOrderButton();
         updateSummary();
     }
 
-    function renderSlots() {
-        const container = document.getElementById('slots-container');
-        container.innerHTML = '';
-
-        if (!selectedHour) return;
-
-        const currentHour = new Date().getHours();
-        const currentMinute = new Date().getMinutes();
-
-        const hourData = availableHours.find(h => h.hour === selectedHour);
-        if (!hourData) return;
-
-        const startHour = selectedHour;
-        const endHour = startHour + 1;
-        const timeString = `${startHour}:00 - ${endHour}:00`;
-
-        // Logic: Disable slot if it's Today AND the hour has passed
-        let isDisabled = false;
-        let statusText = "Available";
-
-        if (selectedDay === 'today') {
-            if (startHour < currentHour) {
-                isDisabled = true;
-                statusText = "Unavailable";
-            } else if (startHour === currentHour && currentMinute > 30) {
-                // If it's the current hour and more than 30 minutes have passed
-                isDisabled = true;
-                statusText = "Unavailable";
-            }
-        }
-
-        // Create HTML structure
-        const label = document.createElement('label');
-        label.className = `time-option ${isDisabled ? 'disabled' : ''}`;
-
-        const isSelected = selectedSlot === timeString;
-
-        label.innerHTML = `
-            <input type="radio" name="delivery_time" value="${timeString}" ${isDisabled ? 'disabled' : ''} ${isSelected ? 'checked' : ''}>
-            <div class="slot-card ${isSelected ? 'selected' : ''}">
-                <span class="slot-time">${timeString}</span>
-                <span class="slot-status">${statusText}</span>
-            </div>
-        `;
-
-        // Add click event
-        const radio = label.querySelector('input[type="radio"]');
-        const slotCard = label.querySelector('.slot-card');
-
-        slotCard.addEventListener('click', function() {
-            if (!isDisabled) {
-                selectSlot(timeString);
-            }
-        });
-
-        container.appendChild(label);
-    }
-
-    function selectSlot(value) {
-        selectedSlot = value;
-
-        // Update all slot cards visual state
-        const allSlotCards = document.querySelectorAll('.slot-card');
-        allSlotCards.forEach(card => {
-            card.classList.remove('selected');
-        });
-
-        // Find and mark the selected slot
-        const allRadios = document.querySelectorAll('input[name="delivery_time"]');
-        allRadios.forEach(radio => {
-            if (radio.value === value) {
-                radio.checked = true;
-                const card = radio.closest('.time-option').querySelector('.slot-card');
-                if (card) {
-                    card.classList.add('selected');
-                }
-            }
-        });
-
-        updateSummary();
-        updatePriceSummary();
-        updateOrderButton();
-    }
-
-    function setDay(day) {
-        selectedDay = day;
-
-        // Update UI for date buttons
-        const buttons = document.querySelectorAll('.date-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-
-        // Reset selections when day changes
-        selectedHour = null;
-        selectedSlot = null;
-
-        // Re-render components
-        renderHourPricingGrid();
-
-        const timeSlotsContainer = document.getElementById('time-slots-container');
-        timeSlotsContainer.style.display = 'none';
-
-        updatePriceSummary();
-        updateOrderButton();
-        updateSummary();
-    }
 
     function updatePriceSummary() {
         const priceBox = document.getElementById('price-summary-box');
@@ -863,16 +670,11 @@
         const summaryDiv = document.getElementById('selection-summary');
         const summaryText = document.getElementById('summary-text');
 
-        if (selectedSlot) {
+        if (selectedHour) {
             summaryDiv.style.display = 'block';
             const dayText = selectedDay === 'today' ? 'Today' : 'Tomorrow';
             const hourData = availableHours.find(h => h.hour === selectedHour);
-            summaryText.innerHTML = `Delivery scheduled at ${hourData.label}</strong> (${selectedSlot})`;
-        } else if (selectedHour) {
-            summaryDiv.style.display = 'block';
-            const dayText = selectedDay === 'today' ? 'Today' : 'Tomorrow';
-            const hourData = availableHours.find(h => h.hour === selectedHour);
-            summaryText.innerHTML = `Please select your time slot at ${hourData.label}</strong>`;
+            summaryText.innerHTML = `Delivery scheduled for <strong>${dayText} at ${hourData.label}</strong>`;
         } else {
             summaryDiv.style.display = 'none';
         }
@@ -880,7 +682,7 @@
 
     function updateOrderButton() {
         const orderButton = document.getElementById('order-button');
-        if (selectedHour && selectedSlot) {
+        if (selectedHour) {
             orderButton.disabled = false;
             orderButton.style.opacity = '1';
             orderButton.style.cursor = 'pointer';
@@ -913,8 +715,8 @@
             return;
         }
 
-        if (!selectedHour || !selectedSlot) {
-            alert("Please select a delivery time slot!");
+        if (!selectedHour) {
+            alert("Please select a delivery hour!");
             return;
         }
 
@@ -943,7 +745,7 @@
 *Order Details:*
 • ${selectedStack} Stack - MAD ${stackPrice.toFixed(2)}
 • Toppings: ${toppingsString}
-• Delivery: ${dayText} at ${hourData.label} (${selectedSlot})
+• Delivery: ${dayText} at ${hourData.label}
 -----------------------
 *Total Amount:* MAD ${totalPrice}
 -----------------------
@@ -955,12 +757,6 @@ Please confirm my order!`;
 
         // Open WhatsApp
         window.open(whatsappUrl, '_blank');
-
-        // Reset form (optional)
-        // setTimeout(() => {
-        //     alert("Order submitted! We'll contact you shortly.");
-        //     location.reload();
-        // }, 1000);
     }
 </script>
 </body>

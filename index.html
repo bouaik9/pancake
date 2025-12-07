@@ -283,6 +283,15 @@
             background: white;
         }
 
+        .slot-card.selected {
+            border-color: var(--primary);
+            background-color: #fff7ed;
+        }
+
+        .slot-card.selected .slot-time {
+            color: var(--primary);
+        }
+
         .slot-time {
             font-weight: 600;
             color: #2c3e50;
@@ -449,7 +458,7 @@
                     <label for="stack1">
                         <span class="icon">🥞</span>
                         Single
-                        <div class="hour-price" style="margin-top: 5px;">MAD 6.99</div>
+                        <div class="hour-price" style="margin-top: 5px;">MAD 5.99</div>
                     </label>
                 </div>
                 <div class="option-item">
@@ -457,7 +466,7 @@
                     <label for="stack2">
                         <span class="icon">🥞🥞</span>
                         Double
-                        <div class="hour-price" style="margin-top: 5px;">MAD 14.99</div>
+                        <div class="hour-price" style="margin-top: 5px;">MAD 12.99</div>
                     </label>
                 </div>
                 <div class="option-item">
@@ -522,11 +531,20 @@
         <div class="form-group">
             <h2>3. Choose Delivery Time</h2>
             <div class="delivery-section">
+                <!-- Date buttons -->
 
 
                 <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 10px;">Select Delivery Hour</h3>
                 <div class="hour-pricing-grid" id="hour-pricing-grid">
                     <!-- Hour cards will be generated here -->
+                </div>
+
+                <!-- Time slots container (will be shown when hour is selected) -->
+                <div id="time-slots-container" style="display: none;">
+                    <h3 style="color: var(--accent); font-size: 1rem; margin-bottom: 10px; margin-top: 20px;">Select Time Slot</h3>
+                    <div id="slots-container" class="time-slots-grid">
+                        <!-- Time slots will be generated here -->
+                    </div>
                 </div>
 
                 <div class="selection-summary" id="selection-summary">
@@ -549,7 +567,7 @@
             <input type="text" id="name" placeholder="John Doe">
 
             <label for="address">Delivery Address</label>
-            <textarea id="address" rows="2" placeholder="Street, Building No..."></textarea>
+            <textarea id="address" rows="2" placeholder="Ain Aati"></textarea>
         </div>
 
         <button class="btn-order" id="order-button" onclick="sendToWhatsapp()">
@@ -562,15 +580,15 @@
 <script>
     // Configuration
     const availableHours = [
-        { hour: 16, label: "4:00 PM", basePrice: 2.99 },
-        { hour: 17, label: "5:00 PM", basePrice: 2.99 },
+        { hour: 16, label: "4:00 PM", basePrice: 1.99 },
+        { hour: 17, label: "5:00 PM", basePrice: 1.99 },
         { hour: 18, label: "6:00 PM", basePrice: 3.99 },
         { hour: 19, label: "7:00 PM", basePrice: 4.99 }
     ];
 
     const stackPrices = {
-        'Single': 6.99,
-        'Double': 14.99,
+        'Single': 5.99,
+        'Double': 11.99,
         'Triple': 19.99
     };
 
@@ -583,6 +601,7 @@
         renderHourPricingGrid();
         updatePriceSummary();
         attachEventListeners();
+        updateOrderButton(); // Initialize button state
     });
 
     function renderHourPricingGrid() {
@@ -606,6 +625,8 @@
 
             card.innerHTML = `
                 <div class="hour-display">${hourData.label}</div>
+                <div class="hour-price">+MAD ${hourData.basePrice.toFixed(2)} delivery</div>
+                <div class="hour-label">Delivery fee</div>
             `;
 
             card.onclick = function() {
@@ -640,68 +661,95 @@
         // Show time slots
         document.getElementById('time-slots-container').style.display = 'block';
 
+        // Clear any previous slot selection
+        selectedSlot = null;
+
         // Re-render slots based on selected hour
         renderSlots();
         updatePriceSummary();
+        updateOrderButton();
+        updateSummary();
     }
 
     function renderSlots() {
         const container = document.getElementById('slots-container');
         container.innerHTML = '';
 
+        if (!selectedHour) return;
+
         const currentHour = new Date().getHours();
         const currentMinute = new Date().getMinutes();
 
-        // If an hour is selected, show its time slots
-        const hoursToShow = selectedHour ? [selectedHour] : [];
+        const hourData = availableHours.find(h => h.hour === selectedHour);
+        if (!hourData) return;
 
-        hoursToShow.forEach(startHour => {
-            const hourData = availableHours.find(h => h.hour === startHour);
-            const endHour = startHour + 1;
-            const timeString = `${startHour}:00 - ${endHour}:00`;
+        const startHour = selectedHour;
+        const endHour = startHour + 1;
+        const timeString = `${startHour}:00 - ${endHour}:00`;
 
-            // Logic: Disable slot if it's Today AND the hour has passed
-            let isDisabled = false;
-            let statusText = "Available";
+        // Logic: Disable slot if it's Today AND the hour has passed
+        let isDisabled = false;
+        let statusText = "Available";
 
-            if (selectedDay === 'today') {
-                if (startHour < currentHour) {
-                    isDisabled = true;
-                    statusText = "Unavailable";
-                } else if (startHour === currentHour && currentMinute > 30) {
-                    // If it's the current hour and more than 30 minutes have passed
-                    isDisabled = true;
-                    statusText = "Unavailable";
-                }
+        if (selectedDay === 'today') {
+            if (startHour < currentHour) {
+                isDisabled = true;
+                statusText = "Unavailable";
+            } else if (startHour === currentHour && currentMinute > 30) {
+                // If it's the current hour and more than 30 minutes have passed
+                isDisabled = true;
+                statusText = "Unavailable";
             }
+        }
 
-            // Create HTML structure
-            const label = document.createElement('label');
-            label.className = `time-option ${isDisabled ? 'disabled' : ''}`;
+        // Create HTML structure
+        const label = document.createElement('label');
+        label.className = `time-option ${isDisabled ? 'disabled' : ''}`;
 
-            label.innerHTML = `
-                <input type="radio" name="delivery_time" value="${timeString}" ${isDisabled ? 'disabled' : ''}>
-                <div class="slot-card">
-                    <span class="slot-time">${timeString}</span>
-                    <span class="slot-status">${statusText}</span>
-                </div>
-            `;
+        const isSelected = selectedSlot === timeString;
 
-            // Add click event
-            const radio = label.querySelector('input[type="radio"]');
-            radio.onclick = function() {
-                selectSlot(timeString, startHour);
-            };
+        label.innerHTML = `
+            <input type="radio" name="delivery_time" value="${timeString}" ${isDisabled ? 'disabled' : ''} ${isSelected ? 'checked' : ''}>
+            <div class="slot-card ${isSelected ? 'selected' : ''}">
+                <span class="slot-time">${timeString}</span>
+                <span class="slot-status">${statusText}</span>
+            </div>
+        `;
 
-            container.appendChild(label);
+        // Add click event
+        const radio = label.querySelector('input[type="radio"]');
+        const slotCard = label.querySelector('.slot-card');
+
+        slotCard.addEventListener('click', function() {
+            if (!isDisabled) {
+                selectSlot(timeString);
+            }
         });
 
-        updateSummary();
+        container.appendChild(label);
     }
 
-    function selectSlot(value, hour) {
+    function selectSlot(value) {
         selectedSlot = value;
-        console.log("User selected time slot:", value);
+
+        // Update all slot cards visual state
+        const allSlotCards = document.querySelectorAll('.slot-card');
+        allSlotCards.forEach(card => {
+            card.classList.remove('selected');
+        });
+
+        // Find and mark the selected slot
+        const allRadios = document.querySelectorAll('input[name="delivery_time"]');
+        allRadios.forEach(radio => {
+            if (radio.value === value) {
+                radio.checked = true;
+                const card = radio.closest('.time-option').querySelector('.slot-card');
+                if (card) {
+                    card.classList.add('selected');
+                }
+            }
+        });
+
         updateSummary();
         updatePriceSummary();
         updateOrderButton();
@@ -721,7 +769,10 @@
 
         // Re-render components
         renderHourPricingGrid();
-        document.getElementById('time-slots-container').style.display = 'none';
+
+        const timeSlotsContainer = document.getElementById('time-slots-container');
+        timeSlotsContainer.style.display = 'none';
+
         updatePriceSummary();
         updateOrderButton();
         updateSummary();
@@ -816,12 +867,12 @@
             summaryDiv.style.display = 'block';
             const dayText = selectedDay === 'today' ? 'Today' : 'Tomorrow';
             const hourData = availableHours.find(h => h.hour === selectedHour);
-            summaryText.innerHTML = `Delivery scheduled for <strong>${dayText} at ${hourData.label}</strong> (${selectedSlot})`;
+            summaryText.innerHTML = `Delivery scheduled at ${hourData.label}</strong> (${selectedSlot})`;
         } else if (selectedHour) {
             summaryDiv.style.display = 'block';
             const dayText = selectedDay === 'today' ? 'Today' : 'Tomorrow';
             const hourData = availableHours.find(h => h.hour === selectedHour);
-            summaryText.innerHTML = `Please select your time slot for <strong>${dayText} at ${hourData.label}</strong>`;
+            summaryText.innerHTML = `Please select your time slot at ${hourData.label}</strong>`;
         } else {
             summaryDiv.style.display = 'none';
         }
@@ -832,9 +883,11 @@
         if (selectedHour && selectedSlot) {
             orderButton.disabled = false;
             orderButton.style.opacity = '1';
+            orderButton.style.cursor = 'pointer';
         } else {
             orderButton.disabled = true;
             orderButton.style.opacity = '0.7';
+            orderButton.style.cursor = 'not-allowed';
         }
     }
 
